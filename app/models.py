@@ -1,7 +1,6 @@
 from app import login, db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import current_user
 
 class Usuario(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,15 +19,15 @@ class Usuario(UserMixin, db.Model):
     def check_password(self, usuario_password):
         return check_password_hash(self.password, usuario_password)
 
-    def carregaUsuarioPeloEmail(usuarioData):
+    def carregaUsuarioPeloEmail(self, usuarioData):
         usuario = Usuario.query.filter_by(email=usuarioData).first()
         return usuario
 
-    def carregaUsuarioPeloCPF(usuarioData):
+    def carregaUsuarioPeloCPF(self, usuarioData):
         usuario = Usuario.query.filter_by(CPF=usuarioData).first()
         return usuario
 
-    def carregaUsuarioPeloPIS(usuarioData):
+    def carregaUsuarioPeloPIS(self, usuarioData):
         usuario = Usuario.query.filter_by(PIS=usuarioData).first()
         return usuario
 
@@ -46,8 +45,8 @@ class Endereco(db.Model):
     def __repr__(self):
         return '<endereco {}>'.format(self.rua)
 
-    def carregaEnderecoUsuario(id):
-        endereco = Endereco.query.filter_by(id_usuario=current_user.id).first()
+    def carregaEnderecoUsuario(self, id):
+        endereco = Endereco.query.filter_by(id_usuario=id).first()
         return endereco
 
 @login.user_loader

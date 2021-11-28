@@ -1,0 +1,58 @@
+{% extends "menu.html" %}
+
+{% block content %}
+    <h1>Cadastro de Endereço</h1>
+    <form action="" method="post" novalidate>
+        {{ formulario.hidden_tag() }}
+        <p>
+            {{ formulario.pais.label }}<br>
+            {{ formulario.pais }}<br>
+            {% for error in formulario.pais.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.estado.label }}<br>
+            {{ formulario.estado }}<br>
+            {% for error in formulario.estado.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.municipio.label }}<br>
+            {{ formulario.municipio }}<br>
+            {% for error in formulario.municipio.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.cep.label }}<br>
+            {{ formulario.cep }}<br>
+            {% for error in formulario.cep.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.rua.label }}<br>
+            {{ formulario.rua }}<br>
+            {% for error in formulario.rua.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.numero.label }}<br>
+            {{ formulario.numero }}<br>
+            {% for error in formulario.numero.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.complemento.label }}<br>
+            {{ formulario.complemento }}<br>
+            {% for error in formulario.complemento.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ formulario.cadastrar() }}</p>
+    </form>
+{% endblock %}

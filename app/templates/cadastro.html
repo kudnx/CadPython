@@ -1,0 +1,51 @@
+{% extends "menu.html" %}
+
+{% block content %}
+    <h1>Cadastro de Usuário</h1>
+    <form action="" method="post" novalidate>
+        {{ formulario.hidden_tag() }}
+        <p>
+            {{ formulario.nome.label }}<br>
+            {{ formulario.nome }}<br>
+            {% for error in formulario.nome.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.email.label }}<br>
+            {{ formulario.email }}<br>
+            {% for error in formulario.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.cpf.label }}<br>
+            {{ formulario.cpf }}<br>
+            {% for error in formulario.cpf.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.pis.label }}<br>
+            {{ formulario.pis }}<br>
+            {% for error in formulario.pis.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.senha.label }}<br>
+            {{ formulario.senha }}<br>
+            {% for error in formulario.senha.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.senha2.label }}<br>
+            {{ formulario.senha2 }}<br>
+            {% for error in formulario.senha2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ formulario.cadastrar() }}</p>
+    </form>
+{% endblock %}

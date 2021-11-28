@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{ titulo }}</title>
+    </head>
+    <body>
+        <a href="{{ url_for('index') }}">Página Inicial</a>
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('cadastrar') }}">Cadastre-se</a>
+        {% else %}
+        <a href="{{ url_for('editar') }}">Editar dados</a>
+            {% if endereco %}
+            <a href="{{ url_for('cadastrar_endereco') }}">Cadastrar um Endereço</a>
+            {% else %}
+            <a href="{{ url_for('editar_endereco') }}">Editar um Endereço</a>
+            {% endif %}
+        <a href="{{ url_for('sair') }}">Sair</a>
+        {% endif %}
+        {% block content %}{% endblock %}
+        {% with mensagens = get_flashed_messages() %}
+        {% if mensagens %}
+        <ul>
+            {% for mensagem in mensagens %}
+            <li>{{ mensagem }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </body>
+</html>

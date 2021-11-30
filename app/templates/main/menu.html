@@ -4,7 +4,7 @@
         <title>{{ titulo }}</title>
     </head>
     <body>
-        <a href="{{ url_for('index') }}">Página Inicial</a>
+        <a href="{{ url_for('main.index') }}">Página Inicial</a>
         {% if current_user.is_anonymous %}
         <a href="{{ url_for('register.cadastrar') }}">Cadastre-se</a>
         {% else %}

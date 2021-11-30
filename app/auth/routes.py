@@ -12,7 +12,7 @@ from werkzeug.security import generate_password_hash
 @bp.route('/entrar', methods=['GET', 'POST'])
 def entrar():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     formulario = FormularioLogin()
     CUsuario = Usuario()
     if formulario.validate_on_submit():
@@ -32,10 +32,10 @@ def entrar():
             flash('Usuário ou senha inválidos!!')
             return redirect(url_for('auth.entrar'))
         login_user(usuario, remember=formulario.lembreMe.data)
-        return redirect(url_for('index'))
-    return render_template('auth/login.html', titulo='Sign In', formulario=formulario)
+        return redirect(url_for('main.index'))
+    return render_template('auth/login.html', titulo='Login', formulario=formulario)
 
 @bp.route('/sair')
 def sair():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))

@@ -13,14 +13,14 @@ from werkzeug.security import generate_password_hash
 @bp.route('/cadastro', methods=['GET', 'POST'])
 def cadastrar():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     formulario = FormularioCadastro()
     if formulario.validate_on_submit():
         usuario = Usuario(nome=formulario.nome.data, email=formulario.email.data, CPF=formulario.cpf.data, PIS=formulario.pis.data)
         usuario.set_password(formulario.senha.data)
         db.session.add(usuario)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     return render_template('register/cadastro.html', titulo='Sign In', formulario=formulario)
 
 @bp.route('/editar', methods=['GET', 'POST'])
@@ -35,12 +35,12 @@ def editar():
         if formulario.senhaAntiga.data != '':
             if not usuario.check_password(formulario.senhaAntiga.data):
                 flash('A senha atual é inválida!!')
-                return redirect(url_for('editar'))
+                return redirect(url_for('registereditar'))
         current_user.nome = formulario.nome.data
         current_user.email = formulario.email.data
         current_user.senha = usuario.set_password(formulario.senha.data)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     elif request.method == 'GET':
         formulario.nome.data = current_user.nome
         formulario.email.data = current_user.email
@@ -57,7 +57,7 @@ def cadastrar_endereco():
         id_usuario=current_user.id)
         db.session.add(endereco)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     return render_template('register/cadastro_endereco.html', titulo='Sign In', formulario=formulario, endereco=endereco2 is None)
 
 @bp.route('/editar_endereco', methods=['GET', 'POST'])
@@ -75,7 +75,7 @@ def editar_endereco():
         endereco.complemento = formulario.complemento.data
         endereco.id_usuario = current_user.id
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     elif request.method == 'GET':
         CEndereco = Endereco()
         endereco = CEndereco.carregaEnderecoUsuario(current_user.id)

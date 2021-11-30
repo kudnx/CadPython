@@ -6,13 +6,13 @@
     <body>
         <a href="{{ url_for('index') }}">Página Inicial</a>
         {% if current_user.is_anonymous %}
-        <a href="{{ url_for('cadastrar') }}">Cadastre-se</a>
+        <a href="{{ url_for('register.cadastrar') }}">Cadastre-se</a>
         {% else %}
-        <a href="{{ url_for('editar') }}">Editar dados</a>
+        <a href="{{ url_for('register.editar') }}">Editar dados</a>
             {% if endereco %}
-            <a href="{{ url_for('cadastrar_endereco') }}">Cadastrar um Endereço</a>
+            <a href="{{ url_for('register.cadastrar_endereco') }}">Cadastrar um Endereço</a>
             {% else %}
-            <a href="{{ url_for('editar_endereco') }}">Editar um Endereço</a>
+            <a href="{{ url_for('register.editar_endereco') }}">Editar um Endereço</a>
             {% endif %}
         <a href="{{ url_for('auth.sair') }}">Sair</a>
         {% endif %}

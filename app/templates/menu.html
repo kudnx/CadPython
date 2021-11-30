@@ -14,7 +14,7 @@
             {% else %}
             <a href="{{ url_for('editar_endereco') }}">Editar um Endereço</a>
             {% endif %}
-        <a href="{{ url_for('sair') }}">Sair</a>
+        <a href="{{ url_for('auth.sair') }}">Sair</a>
         {% endif %}
         {% block content %}{% endblock %}
         {% with mensagens = get_flashed_messages() %}

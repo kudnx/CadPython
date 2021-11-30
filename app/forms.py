@@ -5,12 +5,6 @@ from app.models import Usuario
 from validate_docbr import CPF, PIS
 from flask_login import current_user
 
-class FormularioLogin(FlaskForm):
-    usuario  = StringField("Usuario", validators=[DataRequired()])
-    senha    = PasswordField("Senha", validators=[DataRequired()])
-    lembreMe = BooleanField("Lembre me")
-    entrar   = SubmitField("Entrar")
-
 class FormularioCadastro(FlaskForm):
     nome = StringField("Nome", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired(), Email()])

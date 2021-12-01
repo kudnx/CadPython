@@ -1,24 +1,28 @@
 {% extends "main/menu.html" %}
 
 {% block content %}
-    <h1>Olá Visitante!!</h1>
-    <form action="" method="post" novalidate>
-        {{ formulario.hidden_tag() }}
-        <p>
-            {{ formulario.usuario.label }}<br>
-            {{ formulario.usuario }} <br>
-            {% for error in formulario.usuario.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ formulario.senha.label }}<br>
-            {{ formulario.senha }}<br>
-            {% for error in formulario.senha.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ formulario.lembreMe() }} {{ formulario.lembreMe.label }}</p>
-        <p>{{ formulario.entrar() }}</p>
-    </form>
+    <div class="row">
+    <div class="login">
+        <h1>Olá Visitante!!</h1>
+        <form action="" method="post" novalidate>
+            {{ formulario.hidden_tag() }}
+            <p>
+                {{ formulario.usuario.label }}<br>
+                {{ formulario.usuario }} <br>
+                {% for error in formulario.usuario.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ formulario.senha.label }}<br>
+                {{ formulario.senha }}<br>
+                {% for error in formulario.senha.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ formulario.lembreMe() }} {{ formulario.lembreMe.label }}</p>
+            <p>{{ formulario.entrar() }}</p>
+        </form>
+        </div>
+    </div>
 {% endblock %}

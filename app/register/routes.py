@@ -21,7 +21,7 @@ def cadastrar():
         db.session.add(usuario)
         db.session.commit()
         return redirect(url_for('main.index'))
-    return render_template('register/cadastro.html', titulo='Sign In', formulario=formulario)
+    return render_template('register/cadastro.html', titulo='Cadastro', formulario=formulario)
 
 @bp.route('/editar', methods=['GET', 'POST'])
 @login_required
@@ -44,7 +44,7 @@ def editar():
     elif request.method == 'GET':
         formulario.nome.data = current_user.nome
         formulario.email.data = current_user.email
-    return render_template('register/editar.html', titulo='Sign In', formulario=formulario, endereco=endereco2 is None)
+    return render_template('register/editar.html', titulo='Edição de dados', formulario=formulario, endereco=endereco2 is None)
 
 @bp.route('/cadastrar_endereco', methods=['GET', 'POST'])
 def cadastrar_endereco():
@@ -58,7 +58,7 @@ def cadastrar_endereco():
         db.session.add(endereco)
         db.session.commit()
         return redirect(url_for('main.index'))
-    return render_template('register/cadastro_endereco.html', titulo='Sign In', formulario=formulario, endereco=endereco2 is None)
+    return render_template('register/cadastro_endereco.html', titulo='Cadastro de Endereço', formulario=formulario, endereco=endereco2 is None)
 
 @bp.route('/editar_endereco', methods=['GET', 'POST'])
 def editar_endereco():
@@ -77,7 +77,6 @@ def editar_endereco():
         db.session.commit()
         return redirect(url_for('main.index'))
     elif request.method == 'GET':
-        CEndereco = Endereco()
         endereco = CEndereco.carregaEnderecoUsuario(current_user.id)
         formulario.pais.data = endereco.pais
         formulario.estado.data = endereco.estado
@@ -86,4 +85,4 @@ def editar_endereco():
         formulario.rua.data = endereco.rua
         formulario.numero.data = endereco.numero
         formulario.complemento.data = endereco.complemento
-    return render_template('register/cadastro_endereco.html', titulo='Sign In', formulario=formulario, endereco=endereco is None)
+    return render_template('register/cadastro_endereco.html', titulo='Cadastro de Endereço', formulario=formulario, endereco=None)

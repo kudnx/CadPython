@@ -1,18 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import Usuario
 from validate_docbr import CPF, PIS
 from flask_login import current_user
 
 class FormularioCadastro(FlaskForm):
-    nome = StringField("Nome", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    cpf = StringField("CPF", validators=[DataRequired()])
-    pis = StringField("PIS", validators=[DataRequired()])
-    senha = PasswordField('Senha', validators=[DataRequired()])
+    nome = StringField("Nome", validators=[DataRequired(message='Por Favor preencha o Nome!')])
+    email = StringField("Email", validators=[DataRequired(message='Por Favor preencha o Email!'), Email()])
+    cpf = StringField("CPF", validators=[DataRequired(), Length(min=11, max=11, message='O CPF deve contém 11 dígitos!')], render_kw={"placeholder": "Somente números!"})
+    pis = StringField("PIS", validators=[DataRequired(), Length(min=11, max=11, message='O PIS deve contém 11 dígitos!')], render_kw={"placeholder": "Somente números!"})
+    senha = PasswordField('Senha', validators=[DataRequired(message='Por Favor preencha a Senha!')])
     senha2 = PasswordField(
-        'Repita a Senha', validators=[DataRequired(), EqualTo('senha')])
+        'Repita a Senha', validators=[DataRequired(message='Por Favor preencha a Senha Novamente!'), EqualTo('senha')])
     cadastrar = SubmitField('Cadastrar')
 
     def validate_email(self, email):
@@ -51,11 +51,11 @@ class FormularioEdicao(FlaskForm):
             raise ValidationError('Email já cadastrado!!')
 
 class FormularioCadastroEndereco(FlaskForm):
-    pais = StringField("País", validators=[DataRequired()])
-    estado = StringField("Estado", validators=[DataRequired()])
-    municipio = StringField("Municipio", validators=[DataRequired()])
-    cep = StringField("CEP", validators=[DataRequired()])
-    rua = StringField("Rua", validators=[DataRequired()])
-    numero = StringField("Número", validators=[DataRequired()])
+    pais = StringField("País", validators=[DataRequired(message='Por Favor preencha o País!'), Length(min=2, max=2, message='O País deve ser uma SIGLA!')], render_kw={"placeholder": "ex: BR"})
+    estado = StringField("Estado", validators=[DataRequired(message='Por Favor preencha o Estado!'), Length(min=2, max=2, message='O Estado deve ser uma SIGLA!')], render_kw={"placeholder": "ex: MG"})
+    municipio = StringField("Municipio", validators=[DataRequired(message='Por Favor preencha o Município!')])
+    cep = StringField("CEP", validators=[DataRequired(message='Por Favor preencha o CEP!')])
+    rua = StringField("Rua", validators=[DataRequired(message='Por Favor preencha o RUA!')])
+    numero = StringField("Número", validators=[DataRequired(message='Por Favor preencha o Número!')])
     complemento = StringField("Complemento")
     cadastrar = SubmitField('Cadastrar')

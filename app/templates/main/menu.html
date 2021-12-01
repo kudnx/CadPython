@@ -1,30 +1,58 @@
 <!doctype html>
 <html>
     <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../static/style.css">
         <title>{{ titulo }}</title>
     </head>
     <body>
-        <a href="{{ url_for('main.index') }}">Página Inicial</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('register.cadastrar') }}">Cadastre-se</a>
-        {% else %}
-        <a href="{{ url_for('register.editar') }}">Editar dados</a>
-            {% if endereco %}
-            <a href="{{ url_for('register.cadastrar_endereco') }}">Cadastrar um Endereço</a>
-            {% else %}
-            <a href="{{ url_for('register.editar_endereco') }}">Editar um Endereço</a>
+        <nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Página Inicial</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    {% if current_user.is_anonymous %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register.cadastrar') }}">Cadastre-se</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register.editar') }}">Editar dados</a>
+                    </li>
+                        {% if endereco %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register.cadastrar_endereco') }}">Cadastrar um Endereço</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register.editar_endereco') }}">Editar um Endereço</a>
+                        </li>
+                    {% endif %}
+                        <!-- to do -->
+                    {% endif %}
+                </ul>
+                
+            </div>
+            <div class="navbar-btn">
+                {% if current_user.is_authenticated %}
+                <a class="nav-link" href="{{ url_for('auth.sair') }}"><button type="button" class="btn btn-primary btn-nav">Sair</button></a>
+                {% endif %}
+            </div>
+          </nav>
+          <div class="row">
+            <div class="login">
+            {% block content %}{% endblock %}
+            {% with mensagens = get_flashed_messages() %}
+            {% if mensagens %}
+            <ul>
+                {% for mensagem in mensagens %}
+                <li id="mensagem">{{ mensagem }}</li>
+                {% endfor %}
+            </ul>
             {% endif %}
-        <a href="{{ url_for('auth.sair') }}">Sair</a>
-        {% endif %}
-        {% block content %}{% endblock %}
-        {% with mensagens = get_flashed_messages() %}
-        {% if mensagens %}
-        <ul>
-            {% for mensagem in mensagens %}
-            <li>{{ mensagem }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
+            {% endwith %}
+            </div>    
+          </div>
+        
     </body>
 </html>

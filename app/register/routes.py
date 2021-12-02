@@ -4,11 +4,7 @@ from app.register import bp
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.register.forms import FormularioCadastro, FormularioEdicao, FormularioCadastroEndereco
-from app.auth.forms import FormularioLogin
 from app.models import Usuario, Endereco
-from email_validator import validate_email, EmailNotValidError
-from validate_docbr import CPF, PIS
-from werkzeug.security import generate_password_hash
 
 @bp.route('/cadastro', methods=['GET', 'POST'])
 def cadastrar():

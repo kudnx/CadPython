@@ -11,4 +11,4 @@
 ### Instruções de instalação:
 ##### Para rodar a aplicação em um ambiente local, deve-se instalar os módulos listados no arquivo requirements.txt na raiz da aplicação, em seguida executando "flask run" sem aspas inicialização da aplicação.
 
-#####Para rodar a aplicação em um container, deve-se seguir os comandos listados no arquivo docker.txt na raiz da aplicação.
+##### Para rodar a aplicação em um container, deve-se seguir os comandos listados no arquivo docker.txt na raiz da aplicação.

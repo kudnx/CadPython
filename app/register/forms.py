@@ -8,8 +8,8 @@ from flask_login import current_user
 class FormularioCadastro(FlaskForm):
     nome = StringField("Nome", validators=[DataRequired(message='Por Favor preencha o Nome!')])
     email = StringField("Email", validators=[DataRequired(message='Por Favor preencha o Email!'), Email()])
-    cpf = StringField("CPF", validators=[DataRequired(), Length(min=11, max=11, message='O CPF deve contém 11 dígitos!')], render_kw={"placeholder": "Somente números!"})
-    pis = StringField("PIS", validators=[DataRequired(), Length(min=11, max=11, message='O PIS deve contém 11 dígitos!')], render_kw={"placeholder": "Somente números!"})
+    cpf = StringField("CPF", validators=[DataRequired(message='Por Favor preencha o CPF!'), Length(min=11, max=11, message='O CPF deve contém 11 dígitos!')], render_kw={"placeholder": "Somente números!"})
+    pis = StringField("PIS", validators=[DataRequired(message='Por Favor preencha o PIS!'), Length(min=11, max=11, message='O PIS deve contém 11 dígitos!')], render_kw={"placeholder": "Somente números!"})
     senha = PasswordField('Senha', validators=[DataRequired(message='Por Favor preencha a Senha!')])
     senha2 = PasswordField(
         'Repita a Senha', validators=[DataRequired(message='Por Favor preencha a Senha Novamente!'), EqualTo('senha')])
